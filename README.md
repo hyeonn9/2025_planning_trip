@@ -83,7 +83,7 @@ AI 여행지 추천부터 일정 · 지출 관리까지,
 
 ---
 
-## 🧩 기술적 포인트 (이력서/면접용)
+## 🧩 기술적 포인트
 - **모노레포 구성**: npm workspaces로 frontend·backend 통합 관리, `concurrently`로 동시 실행
 - **계층형 백엔드**: routes → controller → service 구조, Prisma ORM으로 PostgreSQL 접근
 - **외부 API 5종 오케스트레이션**: OpenAI · Kakao Map · Google Maps(Street View) · OpenWeather · 기상청
