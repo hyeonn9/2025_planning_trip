@@ -21,6 +21,76 @@ AI 여행지 추천부터 일정 · 지출 관리까지,
 > **더 간편하게, 더 똑똑하게, 더 즐겁게**  
 > **SLAY**와 함께 가뿐한 여행을 시작하세요.
 
+## ✨ 기능 상세 (Features in Depth)
+
+### 🧠 AI 여행지 추천 & 일정 피드백
+- OpenAI 기반 대화형 챗봇으로 **여행지·장소 추천**과 **여행 정보 질의응답**을 제공합니다. (`/openai/search-places`, `/openai/travel-info`, 세션 관리 `/reset-session`)
+- 완성된 일정에 대해 **AI가 동선·방향성을 점검하는 피드백**을 제공합니다. (`feedbackRoutes`, `FeedbackModal`)
+
+### 📆 드래그 앤 드롭 일정 편성
+- `Trip → Day → DayPlace → Place` 4단 구조로 여행 일정을 관리합니다.
+- `@hello-pangea/dnd` 기반으로 **일자(Day) 재정렬**, **장소(Place) 재정렬**, **방문 시간 배정**을 드래그만으로 처리합니다. (`reorderDay`, `reorderPlace`, time 설정 API)
+
+### 🗺️ 지도 · 거리뷰 · 날씨 통합
+- Kakao Map으로 일정 내 장소를 지도에 시각화하고, **Google Street View**로 방문 전 장소를 미리 봅니다. (`KakaoMap`, `DetailKakaoMap`, `RecordKakaoMap`)
+- OpenWeather·기상청 API를 연동해 여행지의 **기상 정보**를 함께 노출합니다. (`WeatherBox`)
+
+### 👥 친구 & 동행 초대 (협업)
+- 친구 **요청 / 수락 / 거절 / 검색** 기능과, 특정 여행에 친구를 **동행으로 초대**해 **일정을 공동 편집**하는 협업 기능을 제공합니다. (`friendshipRoutes`: `/request`, `/accept`, `/invite`, `/invite/accept` 등)
+- `Friendship`, `TripInvitation` 모델과 `FriendshipStatus`·`InvitationStatus` 상태값으로 관계·초대 흐름을 관리합니다.
+
+### 💸 경비 입력 & 1/N 정산
+- 항목별 지출을 입력하고(`/schedule/expense/create`), 여행별 지출 내역 조회와 **자동 정산(`/settle`)**을 지원합니다. (`SettleUpModal`, `ExpenseType` enum)
+
+### 📝 여행 기록 갤러리 (소셜)
+- 여행 일정을 **게시글로 공유**하고, 다른 사용자의 기록에 **좋아요·댓글**을 남길 수 있습니다. (`postRoutes`, `Post`·`Like`·`Comment` 모델)
+
+### ✅ 준비물 체크리스트
+- 여행별 준비물 체크리스트를 생성·수정·삭제합니다. (`checklistRoutes` CRUD)
+
+### 🔐 소셜 로그인 & 인증
+- **Google · Naver · Kakao** 3종 OAuth 2.0 소셜 로그인(Passport)과 JWT 액세스/리프레시 토큰 기반 인증, 닉네임 설정·중복 확인을 제공합니다. (`authRoutes`, `ProviderType` enum)
+
+---
+
+## 🗂️ 데이터 모델 (PostgreSQL · Prisma)
+
+총 **13개 모델**로 구성됩니다.
+
+| 도메인 | 모델 |
+| --- | --- |
+| 사용자/인증 | `User` (+ `ProviderType`) |
+| 일정 | `Trip`, `Day`, `DayPlace`, `Place`, `TripPlace` (+ `TripVisibility`·`CompanionType`·`ThemeType`·`PlaceType`) |
+| 경비 | `Expense` (+ `ExpenseType`) |
+| 협업 | `Friendship`(+`FriendshipStatus`), `TripInvitation`(+`InvitationStatus`) |
+| 소셜/기록 | `Post`, `Like`, `Comment` |
+| 준비 | `Checklist` |
+
+## 🔌 API 개요 (8개 라우트군)
+
+| 라우트 | 책임 |
+| --- | --- |
+| `authRoutes` | 소셜 로그인(Google/Naver/Kakao), 토큰 갱신·로그아웃, 닉네임 |
+| `tripRoutes` | 여행 생성/조회/수정/삭제, 내 여행·최근 여행 |
+| `scheduleRoutes` | 일자·장소 추가·재정렬·시간 배정, 경비 생성/정산 |
+| `checklistRoutes` | 준비물 체크리스트 CRUD |
+| `friendshipRoutes` | 친구 관계·동행 초대 |
+| `postRoutes` | 여행 기록 게시글·상세 |
+| `feedbackRoutes` | AI 일정 피드백 |
+| `openAIChat` | AI 장소 검색·여행 정보·세션 |
+
+> API 문서는 Swagger(`swagger-ui-express`)로 제공됩니다.
+
+---
+
+## 🧩 기술적 포인트 (이력서/면접용)
+- **모노레포 구성**: npm workspaces로 frontend·backend 통합 관리, `concurrently`로 동시 실행
+- **계층형 백엔드**: routes → controller → service 구조, Prisma ORM으로 PostgreSQL 접근
+- **외부 API 5종 오케스트레이션**: OpenAI · Kakao Map · Google Maps(Street View) · OpenWeather · 기상청
+- **배포**: AWS EC2 + Nginx 리버스 프록시
+- **인증**: OAuth 2.0 3종 + JWT(Access/Refresh) + Passport 전략 분리
+
+
 ### ✔️ 핵심 기능
 
 | 기능                  | 설명                |
