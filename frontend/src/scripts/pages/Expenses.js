@@ -107,7 +107,7 @@ export const Expenses = () => {
   const fetchUserProfiles = async (nicknames) => {
     const uniqueNicknames = [...new Set(nicknames)];
     const profilePromises = uniqueNicknames.map(async (nickname) => {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/trip/users/${nickname}/profile`, {
+      const response = await fetch(`/trip/users/${nickname}/profile`, {
         credentials: "include",
       });
       if (response.ok) {
@@ -126,7 +126,7 @@ export const Expenses = () => {
       if (!trip_id) return;
       setIsLoading(true);
       try {
-        const tripRes = await fetch(`${process.env.REACT_APP_API_URL}/trip/${trip_id}`, {
+        const tripRes = await fetch(`/trip/${trip_id}`, {
           headers: { Authorization: `Bearer ${token}` },
           credentials: "include",
         });
@@ -144,7 +144,7 @@ export const Expenses = () => {
           setActiveDay(preparationTab.label);
         }
 
-        const settlementRes = await fetch(`${process.env.REACT_APP_API_URL}/trip/${trip_id}/settle`, {
+        const settlementRes = await fetch(`/trip/${trip_id}/settle`, {
           headers: { Authorization: `Bearer ${token}` },
           credentials: "include",
         });
@@ -162,7 +162,7 @@ export const Expenses = () => {
         
         const selectedDay = dayTabs.find((tab) => tab.label === "여행 준비");
         const day_id = selectedDay ? selectedDay.day_id : null;
-        const url = `${process.env.REACT_APP_API_URL}/trip/${trip_id}/expenses?day_id=${day_id === null ? "null" : day_id}`;
+        const url = `/trip/${trip_id}/expenses?day_id=${day_id === null ? "null" : day_id}`;
         const expensesRes = await fetch(url, {
           headers: { Authorization: `Bearer ${token}` },
           credentials: "include",
@@ -193,7 +193,7 @@ export const Expenses = () => {
       const selectedDay = dayTabs.find((tab) => tab.label === activeDay);
       const day_id = selectedDay ? selectedDay.day_id : null;
       try {
-        const url = `${process.env.REACT_APP_API_URL}/trip/${trip_id}/expenses?day_id=${day_id === null ? "null" : day_id}`;
+        const url = `/trip/${trip_id}/expenses?day_id=${day_id === null ? "null" : day_id}`;
         const response = await fetch(url, {
           headers: { Authorization: `Bearer ${token}` },
           credentials: "include",
@@ -219,7 +219,7 @@ export const Expenses = () => {
     const selectedDay = dayTabs.find((tab) => tab.label === activeDay);
     const day_id = selectedDay ? selectedDay.day_id : null;
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/trip/expense/create`, {
+      const response = await fetch(`/trip/expense/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -241,7 +241,7 @@ export const Expenses = () => {
       setDescription("");
       setCategory("");
 
-      const settlementRes = await fetch(`${process.env.REACT_APP_API_URL}/trip/${trip_id}/settle`, {
+      const settlementRes = await fetch(`/trip/${trip_id}/settle`, {
         headers: { Authorization: `Bearer ${token}` },
         credentials: "include",
       });

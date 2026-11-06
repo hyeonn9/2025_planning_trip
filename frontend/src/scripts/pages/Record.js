@@ -70,7 +70,7 @@ const Record = () => {
 
   // 여행 리스트 불러오기
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/schedule/myTrips`, {
+    fetch(`/schedule/myTrips`, {
       credentials: 'include'
     })
       .then(r => r.json())
@@ -83,7 +83,7 @@ const Record = () => {
       .catch(console.error);
 
     // 내가 수락한 초대 일정
-    fetch('http://localhost:8080/trip/invitations/accepted', {
+    fetch('/trip/invitations/accepted', {
       credentials: 'include'
     })
       .then(r => r.json())
@@ -97,7 +97,7 @@ const Record = () => {
   // 1) 여정 선택 시 days 로드 
   useEffect(() => {
     if (!selectedTripId) return;
-    fetch(`${process.env.REACT_APP_API_URL}/schedule/${selectedTripId}`, { credentials: 'include' })
+    fetch(`/schedule/${selectedTripId}`, { credentials: 'include' })
       .then(res => res.json())
       .then(data => {
         setDays(data.trip.days);
@@ -191,7 +191,7 @@ const Record = () => {
 
     try {
       // 2) 서버로 multipart/form-data POST
-      const res = await fetch(`${process.env.REACT_APP_API_URL}/posts/upload`, {
+      const res = await fetch(`/posts/upload`, {
         method: "POST",
         credentials: "include",
         body: form,

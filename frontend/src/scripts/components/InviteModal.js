@@ -6,7 +6,7 @@ import {AlertModal} from "./AlertModal";
 
 // Axios 기본 설정
 const api = axios.create({
-  baseURL: `${process.env.REACT_APP_API_URL}`,
+  baseURL: ``,
   withCredentials: true,
 });
 
