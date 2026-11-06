@@ -15,7 +15,7 @@ const Profile = () => {
   }, [isLoggedIn, navigate]);
 
   const handleLogout = async () => { //로그아웃
-    await fetch(`${process.env.REACT_APP_API_URL}/auth/logout`, {
+    await fetch(`${ }/auth/logout`, {
       method: "POST",
       credentials: "include",
     });

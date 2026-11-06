@@ -18,7 +18,7 @@ export default function GalleryDetail() {
 
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_API_URL}/posts/${post_id}/detail`, {
+        fetch(`${ }/posts/${post_id}/detail`, {
             credentials: 'include'
         })
             .then(res => res.json())

@@ -8,7 +8,7 @@ const MyPage = () => {
   const { user } = useContext(AuthContext);
 
   const handleLogout = async () => {
-    await fetch(`${process.env.REACT_APP_API_URL}/auth/logout`, {
+    await fetch(`${ }/auth/logout`, {
       method: "POST",
       credentials: "include",
     });
