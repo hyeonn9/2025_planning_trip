@@ -8,7 +8,7 @@ import naver from "../../assets/images/naver.svg";
 
 const Login = () => {
   const handleLogin = (provider) => {
-    window.location.href = `${ }/auth/${provider}`;
+    window.location.href = `/auth/${provider}`;
   };
 
   return (

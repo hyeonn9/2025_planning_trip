@@ -116,7 +116,7 @@ const Schedule = () => {
                 setShowFeedback(true);
                 setLoadingFeedbacks(true);
                 try {
-                    const res = await fetch(`${ }/feedback/${trip_id}`);
+                    const res = await fetch(`/feedback/${trip_id}`);
                     const data = await res.json();
                     setFeedbacks(data.feedbacks);
                 } catch (err) {

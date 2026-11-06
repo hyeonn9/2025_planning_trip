@@ -42,7 +42,7 @@ const SetNickname = () => {
   
     try {
       // 2. 중복 검사 (백엔드)
-      const res = await axios.post(`${ }/auth/check-nickname`, 
+      const res = await axios.post(`/auth/check-nickname`, 
         { nickname: trimmed }, 
         { withCredentials: true }
       );
@@ -65,7 +65,7 @@ const SetNickname = () => {
   
     setIsSubmitting(true);
     try {
-      await axios.post(`${ }/auth/set-nickname`, 
+      await axios.post(`/auth/set-nickname`, 
         { nickname: trimmed },
         { withCredentials: true }
       );

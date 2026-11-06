@@ -29,7 +29,7 @@ const LoginModal = ({ isOpen, onClose,user }) => {
   };
 
   const handleLogout = async () => {
-    await fetch(`${ }/auth/logout`, {
+    await fetch(`/auth/logout`, {
       method: "POST",
       credentials: "include",
     });

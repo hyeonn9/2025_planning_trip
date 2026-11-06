@@ -33,7 +33,7 @@ const MySchedule = () => {
   // 여행 목록 불러오기
   const fetchMyTrips = async () => {
     try {
-      const res = await fetch(`${ }/schedule/myTrips`, {
+      const res = await fetch(`/schedule/myTrips`, {
         credentials: "include",
       });
       const data = await res.json();
@@ -51,7 +51,7 @@ const MySchedule = () => {
   // 초대받아 수락한 여행 목록 불러오기
   const fetchAcceptedInvitations = async () => {
     try {
-      const res = await fetch(`${ }/trip/invitations/accepted`, {
+      const res = await fetch(`/trip/invitations/accepted`, {
         credentials: "include",
       });
       const data = await res.json();
@@ -107,7 +107,7 @@ const MySchedule = () => {
   // 여행 삭제 버튼
   const handleDeleteTrip = async () => {
     try {
-      await fetch(`${ }/schedule/${targetTripId}`, {
+      await fetch(`/schedule/${targetTripId}`, {
         method: "DELETE",
         credentials: "include",
       });

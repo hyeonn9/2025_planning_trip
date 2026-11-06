@@ -31,7 +31,7 @@ const NavigationBar = () => {
 
   const handleLatestTrip = async () => {
     try {
-      const res = await fetch(`${ }/schedule/recent`, {
+      const res = await fetch(`/schedule/recent`, {
         credentials: "include",
       });
       const data = await res.json();

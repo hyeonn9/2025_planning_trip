@@ -7,7 +7,7 @@ import "./ChatBot.css";
 
 // Axios 기본 설정
 const api = axios.create({
-  baseURL: `${ }`,
+  baseURL: ``,
   withCredentials: true,
 });
 
