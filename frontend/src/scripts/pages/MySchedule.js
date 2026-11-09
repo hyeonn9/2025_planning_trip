@@ -36,6 +36,7 @@ const MySchedule = () => {
       const res = await fetch(`/schedule/myTrips`, {
         credentials: "include",
       });
+
       const data = await res.json();
 
       const sortedTrips = [...data.trips].sort(

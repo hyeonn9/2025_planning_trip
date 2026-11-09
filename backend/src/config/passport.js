@@ -75,7 +75,7 @@ const findOrCreateUser = async (provider, profile, done) => {
 passport.use(new GoogleStrategy({
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL:"http://localhost:8080/auth/google/callback",
+      callbackURL: `${process.env.URL}/auth/google/callback`,
     }, async (accessToken, refreshToken, profile, done) => {
       try {
         return findOrCreateUser("GOOGLE",profile,done);
@@ -91,7 +91,7 @@ passport.use(new GoogleStrategy({
 passport.use(new NaverStrategy({
       clientID: process.env.NAVER_CLIENT_ID,
       clientSecret: process.env.NAVER_CLIENT_SECRET,
-      callbackURL: "http://localhost:8080/auth/naver/callback",
+      callbackURL: `${process.env.URL}/auth/naver/callback`,
     }, async (accessToken, refreshToken, profile, done) => {
       try {
         return findOrCreateUser("NAVER", profile, done);
@@ -106,7 +106,7 @@ passport.use(new NaverStrategy({
 //카카오 로그인 전략
 passport.use(new KakaoStrategy({
       clientID: process.env.KAKAO_CLIENT_ID,
-      callbackURL: "http://localhost:8080/auth/kakao/callback",
+      callbackURL: `${process.env.URL}/auth/kakao/callback`,
     }, async (accessToken, refreshToken, profile, done) => {
       try {
         return findOrCreateUser("KAKAO", profile, done);
